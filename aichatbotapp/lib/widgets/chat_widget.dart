@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:aichatbotapp/constants/constants.dart';
 import 'package:aichatbotapp/services/asset_managers.dart';
 import 'package:aichatbotapp/widgets/text_widget.dart';

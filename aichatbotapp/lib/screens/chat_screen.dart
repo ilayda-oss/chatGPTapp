@@ -1,6 +1,5 @@
-import 'dart:developer';
-
 import 'package:aichatbotapp/constants/constants.dart';
+import 'package:aichatbotapp/services/api_services.dart';
 import 'package:aichatbotapp/services/services.dart';
 import 'package:aichatbotapp/widgets/chat_widget.dart';
 import 'package:aichatbotapp/widgets/text_widget.dart';
@@ -88,7 +87,15 @@ class _ChatScreenState extends State<ChatScreen> {
                           hintText: "How can i help you",
                           hintStyle: TextStyle(color: Colors.grey)),
                     )),
-                    IconButton(onPressed: () {}, icon: Icon(Icons.send))
+                    IconButton(
+                        onPressed: () async {
+                          try {
+                            await ApiService.getModels();
+                          } catch (error) {
+                            print("error $error");
+                          }
+                        },
+                        icon: Icon(Icons.send))
                   ],
                 ),
               ),
