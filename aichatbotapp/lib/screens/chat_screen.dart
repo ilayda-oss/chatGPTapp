@@ -5,7 +5,9 @@ import 'package:aichatbotapp/widgets/chat_widget.dart';
 import 'package:aichatbotapp/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:provider/provider.dart';
 
+import '../providers/models_provider.dart';
 import '../services/asset_managers.dart';
 
 class ChatScreen extends StatefulWidget {
@@ -32,6 +34,7 @@ class _ChatScreenState extends State<ChatScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final modelsProvider = Provider.of<ModelsProvider>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
         elevation: 2,
@@ -90,7 +93,10 @@ class _ChatScreenState extends State<ChatScreen> {
                     IconButton(
                         onPressed: () async {
                           try {
-                            await ApiService.getModels();
+                            await ApiService.sendMessage(
+                              message: textEditingController.text,
+                              modelId: modelsProvider.getCurrentModel,
+                            );
                           } catch (error) {
                             print("error $error");
                           }
